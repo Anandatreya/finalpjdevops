@@ -7,7 +7,7 @@
 #Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 
 #httpd = SocketServer.TCPServer(("", PORT), Handler)
-fprint ("WElcome to My Udacity FInal Project..")
+print ("WElcome to My Udacity FInal Project..")
 #print ("serving at port", PORT)
 #httpd.serve_forever()
 
