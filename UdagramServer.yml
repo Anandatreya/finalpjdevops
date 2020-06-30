@@ -1,0 +1,94 @@
+# This is the parameter section
+Parameters:
+  EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+ # This is the Resource section
+Resources:
+  LBSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to our load balancer
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${EnvironmentName}-VPCID"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+  WebServerSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to our hosts and SSH from local only
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${EnvironmentName}-VPCID"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 0
+        ToPort: 65535
+        CidrIp: 0.0.0.0/0
+#  ProfileWithRolesForOurApp:
+#    Type: AWS::IAM::InstanceProfile
+#    Properties: 
+#     Roles:
+#        - MyUdagramS3ReadOnlyEC2 
+  WebAppLaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt-get install apt-transport-https curl -y
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+          sudo apt-add-repository "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+          sudo apt-get install kubeadm -y
+          curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+          sudo apt-get install docker.io -y
+          curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64  
+          chmod +x minikube  
+          sudo mv minikube /usr/local/bin/
+#          apt-get update -y
+#          apt-get install apache2 -y
+#          systemctl start apache2.service
+      ImageId: ami-003634241a8fcdec0
+      KeyName: "sshkeypair"
+ #     IamInstanceProfile: !Ref 'ProfileWithRolesForOurApp'
+      SecurityGroups:
+      - Ref: WebServerSecGroup
+      InstanceType: t2.medium
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sdk"
+        Ebs:
+          VolumeSize: '100'
+  WebAppGroup:  
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      VPCZoneIdentifier:
+      - Fn::ImportValue: 
+          !Sub "${EnvironmentName}-PUB-NETS"
+      LaunchConfigurationName:
+        Ref: WebAppLaunchConfig
+      MinSize: '1'
+      MaxSize: '1'
+  #    TargetGroupARNs:
+  #    - Ref: WebAppTargetGroup
+  
+  
