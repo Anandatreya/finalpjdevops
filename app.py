@@ -1,7 +1,7 @@
 import flask
 from flask import jsonify
 
-Aapp = flask.Flask(__name__)
+app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 # Create some test data for our catalog in the form of a list of dictionaries.
