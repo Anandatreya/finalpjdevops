@@ -113,10 +113,10 @@ Resources:
       Type: AWS::ElasticLoadBalancingV2::ListenerRule
       Properties:
         Actions:
-        - Type: forward
+      - Type: forward
           TargetGroupArn: !Ref 'WebAppTargetGroup'
         Conditions:
-        - Field: path-pattern
+      - Field: path-pattern
           Values: [/]
         ListenerArn: !Ref 'Listener'
         Priority: 1
