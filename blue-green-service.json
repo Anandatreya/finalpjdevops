@@ -1,0 +1,22 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"finalpjdevopslb",
+      "labels":{
+         "app":"finalpjdevopslb"
+      }
+   },
+   "spec":{
+      "ports": [
+         {
+           "port":8000,
+           "targetPort":8000
+         }
+      ],
+      "selector":{
+         "app":"finalpjdevops"
+      },
+      "type": "LoadBalancer"
+   }
+}
