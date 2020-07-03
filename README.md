@@ -8,3 +8,6 @@ The Repository contains the following files:
 4. requirements.txt
 5. Makefile
 6. Project Deployment - Blue Green Deployment.docx - This is the step by step screenshot of the Blue Green execution of the Jenkins workflow.
+7. Blue_controller.json  - The kubernetes container deployment script
+8. blue-green-service.json - Load Balancer script
+9. Project Deployment - Blue Green Deployment_V2.docx - Step by step screenshot of the Blue Container deployment steps into the Kubernetes 
