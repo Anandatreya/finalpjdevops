@@ -7,3 +7,4 @@ The Repository contains the following files:
 3. app.py - The source code of the project
 4. requirements.txt
 5. Makefile
+6. Project Deployment - Blue Green Deployment.docx - This is the step by step screenshot of the Blue Green execution of the Jenkins workflow.
