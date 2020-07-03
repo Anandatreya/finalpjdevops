@@ -1,8 +1,8 @@
 //    This Jenkinsfile will login to GitHub repository , performs a lint on app program, perform a docker build based
 //    on Dockerfile in Github. The image is then pushed into Docker Hub  
-//    The Docker image is then run on the Target BLUE Deployment server
+//    The Docker container is then deployed  on the Target BLUE Deployment server Kubernetes cluster
 //    PLease change the server IP address to the BLUE server before uploading this script to GitHub  
-//    def dockerRun= 'docker run -p 8000:80 -d anandatreya/finalpjdevops --name finalpjdevop'
+
     pipeline{
             agent any
             stages {
@@ -39,16 +39,19 @@
                 }
                 
                 }
-                stage ('Run Docker on Target Host'){
-                steps{
-//              def dockerRun= 'docker run -p 8000:80 -d anandatreya/finalpjdevops '       
-                sshagent(['ubuntu-server']) {
-    // some block
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@34.215.62.88 docker run -p 8000:8000 -d anandatreya/finalpjdevops'
+               stage('Deploy Kubernetes Cluster') {
+             steps {
+                 sshagent(['ubuntu-server']) {
+    
+    sh "scp -o StrictHostKeyChecking=no blue-controller.json ubuntu@54.212.118.220:/home/ubuntu"
+    sh "scp  blue-green-service.json ubuntu@54.212.118.220:/home/ubuntu"
+    
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.212.118.220 kubectl apply -f blue-controller.json"
+    sh "ssh ubuntu@54.212.118.220 kubectl apply -f blue-green-service.json"
+  
+}             
 }
-                }
-                
-                }
+         }
 
 
             }
