@@ -2,26 +2,26 @@
    "kind":"ReplicationController",
    "apiVersion":"v1",
    "metadata":{
-      "name":"blue",
+      "name":"srv-finalpjdevops",
       "labels":{
-         "app":"blue"
+         "app":"finalpjdevops"
       }
    },
    "spec":{
       "replicas":1,
       "selector":{
-         "app":"blue"
+         "app":"finalpjdevops"
       },
       "template":{
          "metadata":{
             "labels":{
-               "app":"blue"
+               "app":"finalpjdevops"
             }
          },
          "spec":{
             "containers":[
                {
-                  "name":"blue",
+                  "name":"finalpjdevops",
                   "image":"anandatreya/finalpjdevops",
                   "ports":[
                      {
