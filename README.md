@@ -1,6 +1,6 @@
 # finalpjdevops
 This is the repository for the Capstone  Project for the Cloud Devops Nano degree program 
-THis is the sub-branch of the master branch and is used to execute the Green Deployment line.
+THis is the sub-branch of the master branch and is used to execute the Blue Deployment line.
 The Repository contains the following files:
 1. Jenkinsfile
 2. Dockerfile
