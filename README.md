@@ -7,3 +7,5 @@ The Repository contains the following files:
 3. app.py - The source code of the project
 4. requirements.txt
 5. Makefile
+6. Green-controller.json  - The kubernetes container deployment script
+7. blue-green-service.json - Load Balancer script
