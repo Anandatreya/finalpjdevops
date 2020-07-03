@@ -2,9 +2,9 @@
    "kind":"Service",
    "apiVersion":"v1",
    "metadata":{
-      "name":"bluegreenlb",
+      "name":"finalpjdevopslb",
       "labels":{
-         "app":"bluegreenlb"
+         "app":"finalpjdevopslb"
       }
    },
    "spec":{
@@ -15,7 +15,7 @@
          }
       ],
       "selector":{
-         "app":"app"
+         "app":"finalpjdevops"
       },
       "type": "LoadBalancer"
    }
