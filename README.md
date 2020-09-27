@@ -20,7 +20,7 @@ The Cloudformation automated templates provision the base network components (co
 Cloudformation templates allow for rapid provisioning and tear down of the environment through the usage of Cloudformation stacks. Also, usage of pre-defined and reusable Cloudformation templates allow for expanding the environment with changing needs.  
 
 How does the code work:
-There are three parts to the GitHub code:
-Part A - CloudFormation stack creation pipeline
-Part B - Blue Deployment pipeline
-Part C - Green Deployment pipeline
+There are three pipelines to the Jenkins pipeline:
+Part A - CloudFormation stack creation pipeline stage. This stage logs in to the GitHub repository where the Cloudformation stack scripts are stored and executes the Stack creation process to build the EC2 instances as well as install the Kubernetes cluster software in each server
+Part B - Blue Deployment pipeline - This multi-stage pipeline logs in to the GitHub repository, makes the python environment, performing linting of the application code using pylint, builds a Docker container, pushes Docker image to the Docker hub and finally deploys the containerized code to the Kubernetes cluster.
+Part C - Green Deployment pipeline - This multi-stage pipeline logs in to the GitHub repository, makes the python environment, performing linting of the application code using pylint, builds a Docker container, pushes Docker image to the Docker hub and finally deploys the containerized code to the Kubernetes cluster.
