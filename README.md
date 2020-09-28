@@ -5,7 +5,7 @@ The Repository contains the following files:
 
 1. Jenkinsfile
 2. Project Submission_K8ClusterInitdocx - This is the step by step screenshot of the Cloudformation script of the Jenkins workflow.
-3. UdagramNetwork.yml - This is the network setup of the cloudformation. THis was run outside the jenkins environment via CLoudformation CLI.
+3. UdagramNetwork.yml - This is the network setup of the cloudformation. This step was executed outside the Jenkins environment via Cloudformation CLI.
 4. UdagramNetwork-parameters.json - This is the parameter file for the UdagramNetwork.yml
-5. UdagramServer.yml - This is the server setup of the cloudformation and is executed from the Jenkins pipeline. This builds the EC2 instances as well as brings the instances under a Load Balancer.
+5. UdagramServer.yml - This is the server setup of the cloudformation and is executed via Jenkins as a separate pipeline. This builds the EC2 instances as well as brings the instances under a Load Balancer.
 6. UdagramServer-parameters.json - This is the parameter file for the UdagramServer.yml
