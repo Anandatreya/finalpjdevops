@@ -6,7 +6,7 @@ Jenkins Pipeline:
 
 A Jenkins pipeline serves as the core automation engine of the project architecture.
 The Jenkins pipeline delivers a Continuous Integration service environment automating real time code updates made to the GitHub repository and taking the code through linting checks. 
-Further, the Jenkins pipeline code is extended to organize a Continuous Deployment environment, packaging the application code and operating system environment into a Docker container. The Docker container is managed via Docker Hub.
+Further, the Jenkins pipeline code is extended to organize a Continuous Delivery environment, packaging the application code and operating system environment into a Docker container. The Docker container is managed via Docker Hub.
 
 Docker Containers:
 The application code and essential Operating system environment is packaged and containerized using Docker. All Docker code repositories are managed via the Docker Hub.
